@@ -5,7 +5,7 @@
 ![sentence-transformers](https://img.shields.io/badge/sentence--transformers-allMiniLM--L6--v2-orange)
 ![Docker](https://img.shields.io/badge/deployed-HuggingFace-yellow)
 
-a semantic word chain game powered by transformer embeddings. bridge two words using meaning — not spelling, not rhyme, pure semantic similarity.
+A semantic word chain game powered by transformer embeddings. bridge two words using meaning — not spelling, not rhyme, pure semantic similarity.
 
 ![demo](demo.gif)
 
@@ -15,18 +15,18 @@ a semantic word chain game powered by transformer embeddings. bridge two words u
 
 ## the idea
 
-most word games judge you on vocabulary or spelling. this one judges you on meaning. every word you type is encoded into a 384 dimensional vector by a transformer model and scored against the previous word using cosine similarity. too weak a connection and you lose a life. the model decides everything — no hardcoded word lists, no dictionary lookups.
+Most word games judge you on vocabulary or spelling. this one judges you on meaning. every word you type is encoded into a 384 dimensional vector by a transformer model and scored against the previous word using cosine similarity. too weak a connection and you lose a life. the model decides everything — no hardcoded word lists, no dictionary lookups.
 
 ---
 
 ## gameplay
 
-you are given a start word and a target word. bridge them — each step must connect to the last.
+You are given a start word and a target word. bridge them — each step must connect to the last.
 ```
 dog → wild → animal → predator → wolf
 ```
 
-five realms. increasing difficulty. optional riddles between realms for bonus lives. one mandatory riddle at the final gate. lose all lives and the void consumes you.
+Five realms. increasing difficulty. optional riddles between realms for bonus lives. one mandatory riddle at the final gate. lose all lives and the void consumes you.
 
 | realm | threshold | bridges |
 |-------|-----------|---------|
@@ -40,7 +40,7 @@ five realms. increasing difficulty. optional riddles between realms for bonus li
 
 ## under the hood
 
-the core mechanic runs on `sentence-transformers/all-MiniLM-L6-v2`. each word submission triggers real time inference — the word is embedded and its cosine similarity to the previous word is computed instantly.
+The core mechanic runs on `sentence-transformers/all-MiniLM-L6-v2`. each word submission triggers real time inference — the word is embedded and its cosine similarity to the previous word is computed instantly.
 ```python
 sim(current_word, new_word) >= threshold  # accepted or rejected
 ```
@@ -91,5 +91,6 @@ semantic-escape-game/
 building this showed how transformer embeddings actually represent meaning in practice — not just in theory. the hardest part was calibrating thresholds. too strict and the game feels unfair, too loose and any word passes. cosine similarity scores are unintuitive until you spend time mapping which words the model considers close and which it doesn't.
 
 ---
+
 
 *the void remembers every word you never said.*
